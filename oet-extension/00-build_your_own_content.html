@@ -380,14 +380,11 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-fork">1. Create a New Fork</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-pages-setting">2. GitHub Pages Setting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-settings">3. Deploy Settings</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-content-i-e-feature-branch">3a. Content (i.e. feature) Branch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-modification">3. Content Modification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-add-your-own-logo">3a. Add your own logo</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-modification-setup">4. Content Modification Setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-add-your-own-logo">4a. Add your own logo</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-settings">4. Deploy Settings</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-workflow-deployment">5. GitHub Workflow Deployment</a></li>
 </ul>
             </nav>
@@ -408,6 +405,16 @@
 <li><p>Set up and deploy a static website like this course using <a class="reference external" href="https://github.com/peaceiris/actions-gh-pages?tab=readme-ov-file#%EF%B8%8F-static-site-generators-with-python">Github Pages action</a></p></li>
 <li><p>Modify this course based on the Jupyter Book <a class="reference external" href="https://jupyterbook.org/en/stable/basics/organize.html">structure</a>.</p></li>
 </ul>
+<div class="tip admonition">
+<p class="admonition-title">Video Tutorial</p>
+<div style="position: relative; width: 100%; padding-bottom: 56.25%">
+<iframe src="https://www.youtube.com/embed/mvOgmEgRIhc"
+        title="How to create you own energy modeling course" frameborder="0" allowfullscreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        style="position: absolute; width: 95%; height: 95%;">
+</iframe>
+</div>
+</div>
 <!-- If you want to see what others have created, you can visit -->
 <p>Before starting, please make sure that you are using the correct python environment that have at least all the python package dependencies from <code class="docutils literal notranslate"><span class="pre">environment.yaml</span></code> or <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>. The instruction are <a class="reference internal" href="../intro.html#with-conda-recommended"><span class="std std-ref">here if you are using conda (reccomended)</span></a> and <a class="reference internal" href="../intro.html#with-pip"><span class="std std-ref">here if you are using pip</span></a>.</p>
 <p>To follow this tutorial, basic usage of Git is a prerequisit. Here are some resources and tutorials to help you get started with Git:</p>
@@ -435,26 +442,8 @@
 </center>
 </div>
 <blockquote>
-<div><p><strong>Note:</strong> The key point is to have at least one branch, beside the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>, in your fork. This has been tested using both the <code class="docutils literal notranslate"><span class="pre">main</span></code>, as well as the <code class="docutils literal notranslate"><span class="pre">side</span> <span class="pre">branches</span></code>.</p>
+<div><p><strong>Note:</strong> The purpose of this is to retain the initial <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch, which is needed for the next section.</p>
 </div></blockquote>
-<p>In this workflow:</p>
-<ul class="simple">
-<li><p>the published website static site content (<code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span></code> output) is in the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch,</p></li>
-<li><p>the source code (i.e. Jupyter Book input) is in an arbitrary <code class="docutils literal notranslate"><span class="pre">branch</span></code> defined by the user: any other than <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>,</p></li>
-</ul>
-<p>The arbitrary <code class="docutils literal notranslate"><span class="pre">branch</span></code> can be created locally:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">switch</span> <span class="o">-</span><span class="n">c</span> <span class="n">content_branch</span>
-<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">content_branch</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch will be automatically generated, as defined by the <code class="docutils literal notranslate"><span class="pre">deploy.yml</span></code> workflow, hence its creation is not required.</p></li>
-<li><p>It is <strong>not</strong> required to have the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> locally, once generated by the workflow, as it hosts only the static site build files, which are taken care of by the workflow.</p></li>
-</ul>
-<blockquote>
-<div><p><strong>Note:</strong> The remote <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>, itself, hosts the required <code class="docutils literal notranslate"><span class="pre">.html</span></code>, <code class="docutils literal notranslate"><span class="pre">.css</span></code>, <code class="docutils literal notranslate"><span class="pre">.js</span></code>, and the other files, used for generating the <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;your-username&gt;/data-science-for-esm</span></code> website. <br /> <u>There is no requirement of having this branch locally.</u></p>
-</div></blockquote>
-<p>These will be re-generated, upon a successful workflow execution, every time <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> is performed, in the prior specified git branch. Branch specification is provided in <a class="reference internal" href="#deploy-settings"><span class="xref myst">Deploy Settings</span></a>.</p>
 </section>
 <section id="github-pages-setting">
 <h2>2. GitHub Pages Setting<a class="headerlink" href="#github-pages-setting" title="Link to this heading">#</a></h2>
@@ -475,105 +464,28 @@
     <figcaption>Clicking on this figure will lead directly to the our <strong>GitHub Pages</strong> settings menu</figcaption>
 </figure>
 </center>
-<p>Clone the forked <code class="docutils literal notranslate"><span class="pre">data-science-for-esm</span></code> repository:</p>
+</section>
+<section id="content-modification">
+<h2>3. Content Modification<a class="headerlink" href="#content-modification" title="Link to this heading">#</a></h2>
+<p>Modify the content in your computer by cloning your forked <code class="docutils literal notranslate"><span class="pre">data-science-for-esm</span></code> repository:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">data</span><span class="o">-</span><span class="n">science</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">esm</span><span class="o">.</span><span class="n">git</span>
 <span class="n">cd</span> <span class="o">./</span><span class="n">data</span><span class="o">-</span><span class="n">science</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">esm</span>
 </pre></div>
 </div>
-<!-- This GitHub is the go to location for disseminating any material, be it Jupyter Notebooks, slides, videos, markdown text explanations, or links to your other resources.  -->
-</section>
-<section id="deploy-settings">
-<h2>3. Deploy Settings<a class="headerlink" href="#deploy-settings" title="Link to this heading">#</a></h2>
-<!-- **Note:** The key point is to set the correct deployment branch in the <code>./github/workflows/deploy.yml</code>. -->
-<p>In the <code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy.yml</span></code>file of the cloned repository, specify the branch, to be used by the workflow:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">on</span><span class="p">:</span>
-  <span class="c1"># Trigger the workflow on push to the main branch</span>
-  <span class="n">push</span><span class="p">:</span>
-    <span class="n">branches</span><span class="p">:</span>
-    <span class="o">-</span> <span class="n">main</span>
-</pre></div>
-</div>
-<p>Upon the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> command to the specified branch, which in this example is the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch, the workflow will be triggered.</p>
-<blockquote>
-<div><p><strong>Note:</strong> This can be any <code class="docutils literal notranslate"><span class="pre">branch</span></code> other than the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>.</p>
-</div></blockquote>
-<p>In the same <code class="docutils literal notranslate"><span class="pre">deploy.yml</span></code> <a class="reference external" href="https://github.com/open-energy-transition/data-science-for-esm/blob/main/.github/workflows/deploy.yml">file</a> make sure of the following permissions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">permissions</span><span class="p">:</span>
-  <span class="n">pages</span><span class="p">:</span> <span class="n">write</span>
-  <span class="n">deployments</span><span class="p">:</span> <span class="n">write</span>
-  <span class="n">contents</span><span class="p">:</span> <span class="n">write</span>
-  <span class="n">statuses</span><span class="p">:</span> <span class="n">write</span>
-  <span class="n">actions</span><span class="p">:</span> <span class="n">write</span>
-  <span class="n">checks</span><span class="p">:</span> <span class="n">read</span>
-</pre></div>
-</div>
-<p>This setup uses the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch in the workflow, but it can also be any other newly created side-branch. Upon the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>, the <a class="reference internal" href="#github-workflow-deployment"><span class="xref myst">workflow</span></a> will be triggered.</p>
-<p>The deployment itself is the <code class="docutils literal notranslate"><span class="pre">jupyter-build</span> <span class="pre">book</span> <span class="pre">data-science-for-esm</span></code> command. This command is in charge generating the HTML code from the data provided in the data-science-for-esm <a class="reference external" href="https://github.com/open-energy-transition/data-science-for-esm/tree/main/data-science-for-esm">folder</a>.</p>
-<p>Further explanation of this command, i.e. the <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span></code>, as well as the other commands is provided in the <a class="reference external" href="https://github.com/open-energy-transition/data-science-for-esm/blob/main/README.md">README.md</a> file. A more detailed explanation is to be found in the following Jupyter Book references:</p>
+<p>You can modify the content by adding, editing and removing markdown (<code class="docutils literal notranslate"><span class="pre">.md</span></code>) and jupyter notebook (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) files in the <code class="docutils literal notranslate"><span class="pre">data-science-for--esm</span></code> folder.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://jupyterbook.org/en/stable/basics/build.html">Build from the command line</a></p></li>
-<li><p><a class="reference external" href="https://jupyterbook.org/en/stable/structure/toc.html">Structure the Table of Contents</a></p></li>
+<li><p>Make sure that all attachments within the markdown and jupyter notebook are included as well.</p></li>
+<li><p>For a successful deployment of the website, please specify the files and order of those file in the <a class="reference external" href="https://jupyterbook.org/en/stable/structure/toc.html">Table Of Contents</a> <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code>.</p></li>
+<li><p>To modify details of the website, such as the author, logo, other relevant GitHub and Google Collab links, modify the <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code>.</p></li>
 </ul>
-<section id="a-content-i-e-feature-branch">
-<h3>3a. Content (i.e. feature) Branch<a class="headerlink" href="#a-content-i-e-feature-branch" title="Link to this heading">#</a></h3>
-<p>This subsection is intended for users, who would like to:</p>
+<p>you can test run the changes locally by running the <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span> <span class="pre">data-science-for-esm</span></code> command.</p>
 <ul class="simple">
-<li><p>deploy their website from a so-called <code class="docutils literal notranslate"><span class="pre">feature</span></code> branch,</p></li>
-<li><p>keep the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch in sync with the original source, i.e. the upstream.</p></li>
+<li><p>This command is in charge generating the HTML code which you can open from your browser.</p></li>
+<li><p>You can then run <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">clean</span> <span class="pre">data-science-for-esm</span></code> to remove the generated build.</p></li>
+<li><p>Further readings on how <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span></code> works are <a class="reference external" href="https://jupyterbook.org/en/stable/basics/build.html">here</a></p></li>
 </ul>
-<p>Although it is perfectly fine to trigger the workflow from the <code class="docutils literal notranslate"><span class="pre">main</span></code> working branch, there are a couple of reasons why you should stay off the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch and use a <code class="docutils literal notranslate"><span class="pre">feature</span></code> branch instead.</p>
-<p>The argument for doing so is to keep the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch of your fork <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;your-username&gt;/data-science-for-esm</span></code> synchronized/identical to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch of the upstream <code class="docutils literal notranslate"><span class="pre">https://github.com/fneum/data-science-for-esm</span></code> repository.</p>
-<p>In particular, this approach facilitates comparing the fork and the upstream, retrieving updates/patches, and also allows you <ins>resetting</ins> your fork, in case something has gone completely wrong.</p>
-<p>A simple workflow of keeping your fork’s <code class="docutils literal notranslate"><span class="pre">main</span></code> up-to-date with the upstream <code class="docutils literal notranslate"><span class="pre">main</span></code> is:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fneum</span><span class="o">/</span><span class="n">data</span><span class="o">-</span><span class="n">science</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">esm</span>
-<span class="n">git</span> <span class="n">switch</span> <span class="n">main</span> <span class="c1"># move to the main branch of your fork</span>
-<span class="n">git</span> <span class="n">pull</span> <span class="n">upstream</span> <span class="n">main</span>
-</pre></div>
-</div>
-<p>To merge the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch updates, obtained by synchronizing your <code class="docutils literal notranslate"><span class="pre">main</span></code> with the upstream <code class="docutils literal notranslate"><span class="pre">main</span></code>, into your Jupyter Book <code class="docutils literal notranslate"><span class="pre">content_branch</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">switch</span> <span class="n">content_branch</span> <span class="c1"># alternatively you can also do: git checkout content_branch</span>
-<span class="n">git</span> <span class="n">cherry</span><span class="o">-</span><span class="n">pick</span> <span class="o">&lt;</span><span class="n">last</span> <span class="n">main</span> <span class="n">branch</span> <span class="n">commit</span> <span class="nb">hash</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>At this point, if there are conflicts, resolve them manually, while keeping in mind that “incoming” refers to the changes obtained from the upstream using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> and “HEAD” refers current state of the <code class="docutils literal notranslate"><span class="pre">content_branch</span></code>:</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">cherry</span><span class="o">-</span><span class="n">pick</span> <span class="o">--</span><span class="k">continue</span>
-</pre></div>
-</div>
-<p>In order to save these changes, follow the next step.</p>
-</section>
-</section>
-<section id="content-modification-setup">
-<h2>4. Content Modification Setup<a class="headerlink" href="#content-modification-setup" title="Link to this heading">#</a></h2>
-<p>Please use the provided files as templates, as this will assist you in content creating, reducing the time in searching for the answers.</p>
-<blockquote>
-<div><p><strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span></code> builds content from the <em>markdown</em> and jupyter notebook files, hence their content needs modifying.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>The website logo, as well as the other figures can be placed in the <code class="docutils literal notranslate"><span class="pre">data-science-for-esm/_images/</span></code> folder.</p></li>
-<li><p>Please keep in mind that, when changing images and modifying files, the referencing throughout <code class="docutils literal notranslate"><span class="pre">.md</span></code> and <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files needs changing as well.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code> content files are to be located in the root of the <code class="docutils literal notranslate"><span class="pre">data-science-for--esm</span></code> folder, and specified in the <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code>.</p>
-<ul>
-<li><p>If not being placed in the root, the workflow will be unable to find the files specified in the <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code>, resulting in the unsuccessful deployment, and unaccessible <code class="docutils literal notranslate"><span class="pre">github.io</span></code>.</p></li>
-</ul>
-</li>
-<li><p>Please modify <code class="docutils literal notranslate"><span class="pre">*.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code> files as seen fit. They are the core-content.</p></li>
-<li><p>Upon each content update, there is a chain of git to-do commands, resulting in the website update:</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
-<span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
-<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;new changes applied&#39;</span>
-<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">content_branch</span>
-</pre></div>
-</div>
-<p>Both <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code>, as well as the <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> are to remain in the root of the <code class="docutils literal notranslate"><span class="pre">data-science-for</span> <span class="pre">esm</span></code> folder. The details of the website, such as the author, logo, other relevant GitHub and Google Collab links, are defined in the <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code>. Please use the already provided <code class="docutils literal notranslate"><span class="pre">_toc</span></code> and <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> files as a template, and follow their structure.</p>
-<ul class="simple">
-<li><p>In the <code class="docutils literal notranslate"><span class="pre">data-science-for-esm/_toc.yml</span></code> <a class="reference external" href="https://github.com/open-energy-transition/data-science-for-esm/blob/main/data-science-for-esm/_toc.yml">file</a>, a sequence of files to be included in the GitHub Page is defined, and further used by the <code class="docutils literal notranslate"><span class="pre">jupyter-build</span> <span class="pre">book</span></code> command.</p></li>
-</ul>
-<p>After a successful run, the TOC displayed in the menu, located on the left side of the page.</p>
 <section id="a-add-your-own-logo">
-<h3>4a. Add your own logo<a class="headerlink" href="#a-add-your-own-logo" title="Link to this heading">#</a></h3>
+<h3>3a. Add your own logo<a class="headerlink" href="#a-add-your-own-logo" title="Link to this heading">#</a></h3>
 <p>If you want your institution to be placed in the top left corner of this website, we recommend that you follow these steps:</p>
 <ul class="simple">
 <li><p>name your institue logo in as <code class="docutils literal notranslate"><span class="pre">logo_int.png</span></code> and place it inside the data-science-for-esm folder.</p></li>
@@ -582,15 +494,32 @@
 </ul>
 </section>
 </section>
+<section id="deploy-settings">
+<h2>4. Deploy Settings<a class="headerlink" href="#deploy-settings" title="Link to this heading">#</a></h2>
+<p>In the <code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy.yml</span></code>file of the cloned repository, specify the branch other than the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>, to be used by the workflow:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">on</span><span class="p">:</span>
+  <span class="c1"># Trigger the workflow on push to the main branch</span>
+  <span class="n">push</span><span class="p">:</span>
+    <span class="n">branches</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>Upon the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> command to the specified branch, which in this example is the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch, the workflow will be triggered.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;new changes applied&#39;</span>
+<span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+</section>
 <section id="github-workflow-deployment">
 <h2>5. GitHub Workflow Deployment<a class="headerlink" href="#github-workflow-deployment" title="Link to this heading">#</a></h2>
-<p>In <a class="reference internal" href="#deploy-settings"><span class="xref myst">Deploy Settings</span></a> we defined the deployment branch in the <code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy.yml</span></code> file, which is used by the workflow, whenever performing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>.</p>
-<p>You are free to use any branch, other than the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>, keeping in mind that only upon the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>, the workflow will be triggered.</p>
-<p>The workflow deployment itself is tracked by your repository’s status indicator, in this case a beige-brown dot  <strong><b><font color='peru'>⏺</font></strong></b></p>
+<p>After a successful <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>, Github will the deploy any workflow within the <code class="docutils literal notranslate"><span class="pre">.github/workflows/</span></code> folder.</p>
+<p>The workflow deployment is tracked by your repository’s status indicator, in this case a beige-brown dot  <strong><b><font color='peru'>⏺</font></strong></b></p>
 <ul class="simple">
+<li><p>This will take minutes to finished, especially for complex python commands in the Jupyter Notebooks.</p></li>
 <li><p>Clicking on it will show the running status, and the deployment details.</p></li>
 </ul>
-<p>As mentioned, the deployment takes minutes to finish, depending on the content files, i.e. the python commands in the Jupyter Notebooks. These will take up the most of the required deployment time.</p>
 <center>
 <figure>
     <!-- <a href='https://github.com/open-energy-transition/data-science-for-esm/settings/pages'> -->
@@ -603,7 +532,7 @@
 <ul class="simple">
 <li><p>successful: a green thick <strong><b><font color='green'>🗸</font></strong></b></p>
 <ul>
-<li><p>you should be able to see the changes taking place, after some moments, at the specified <code class="docutils literal notranslate"><span class="pre">https://&lt;your-username&gt;.github.io/data-science-for-esm</span></code><b><a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></b></p></li>
+<li><p>you should be able to see the changes taking place, after some moments, at the specified <code class="docutils literal notranslate"><span class="pre">https://&lt;your-username&gt;.github.io/data-science-for-esm</span></code></p></li>
 </ul>
 </li>
 <li><p>unsuccessful: a red cross mark <font color="red">🗶</font></p>
@@ -624,13 +553,6 @@
 
 If you’d like to add your course to this list, please reach out to XXX. -->
 <!-- # Internal Doc References -->
-<hr class="footnotes docutils" />
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id2" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p><a class="github reference external" href="https://github.com/executablebooks/cookiecutter-jupyter-book/tree/main">executablebooks/cookiecutter-jupyter-book</a></p>
-</aside>
-</aside>
 </section>
 </section>
 
@@ -701,14 +623,11 @@ If you’d like to add your course to this list, please reach out to XXX. -->
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-fork">1. Create a New Fork</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-pages-setting">2. GitHub Pages Setting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-settings">3. Deploy Settings</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-content-i-e-feature-branch">3a. Content (i.e. feature) Branch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-modification">3. Content Modification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-add-your-own-logo">3a. Add your own logo</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content-modification-setup">4. Content Modification Setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-add-your-own-logo">4a. Add your own logo</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-settings">4. Deploy Settings</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-workflow-deployment">5. GitHub Workflow Deployment</a></li>
 </ul>
   </nav></div>
