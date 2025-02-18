@@ -1,12 +1,12 @@
 .ipynb-checkpoints
-python_basics_tutorial/data
+data-science-for-esm/data
 *.geojson
 *.nc
 *.tiff
 *.tif
 *.html
 *.png
-python_basics_tutorial/tmp/
-python_basics_tutorial/_build/
-python_basics_tutorial/tmp.csv
+data-science-for-esm/tmp/
+data-science-for-esm/_build/
+data-science-for-esm/tmp.csv
 *cleared.ipynb
