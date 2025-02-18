@@ -471,7 +471,7 @@ and/or output (i.e. <code class="docutils literal notranslate"><span class="pre"
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.io:Retrieving network data from https://tubcloud.tu-berlin.de/s/pzytNg9gtkgPpXc/download/network-cem.nc
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.io:Importing network from PyPSA version v0.27.1 while current version is v0.32.0. Read the release notes at https://pypsa.readthedocs.io/en/latest/release_notes.html to prepare your network for import.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.io:Importing network from PyPSA version v0.27.1 while current version is v0.33.0. Read the release notes at https://pypsa.readthedocs.io/en/latest/release_notes.html to prepare your network for import.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.io:Imported network network-cem.nc has buses, carriers, generators, global_constraints, loads, storage_units
@@ -486,7 +486,8 @@ and/or output (i.e. <code class="docutils literal notranslate"><span class="pre"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyPSA Network
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unnamed PyPSA Network
+---------------------
 Components:
  - Bus: 1
  - Carrier: 6
@@ -984,7 +985,7 @@ COP(\Delta T) = 6.81 - 0.121 \Delta T + 0.00063^\Delta T^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f720f2925d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f3820d6bfd0&gt;
 </pre></div>
 </div>
 <img alt="_images/c674ffdd15a93e9fa93a6b1c80b04a442048886ebd15159dfb6536ddff510637.png" src="_images/c674ffdd15a93e9fa93a6b1c80b04a442048886ebd15159dfb6536ddff510637.png" />
@@ -1126,15 +1127,17 @@ telling us what share of electric vehicles is plugged-in <strong>at home</strong
 <span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">e_min_pu</span><span class="o">=</span><span class="n">dsm_profile</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/site-packages/pypsa/components.py:989,</span> in <span class="ni">Network.add</span><span class="nt">(self, class_name, name, suffix, overwrite, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">987</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="ow">and</span> <span class="n">single_component</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">988</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">snapshots</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">989</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Series </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;network snapshots&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">990</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">991</span>     <span class="c1"># Cast names index to string + suffix</span>
-<span class="g g-Whitespace">    </span><span class="mi">992</span>     <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">993</span>         <span class="n">index</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span> <span class="o">+</span> <span class="n">suffix</span>
-<span class="g g-Whitespace">    </span><span class="mi">994</span>     <span class="p">)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/site-packages/pypsa/networks.py:1158,</span> in <span class="ni">Network.add</span><span class="nt">(self, class_name, name, suffix, overwrite, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1156</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="ow">and</span> <span class="n">single_component</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1157</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">snapshots</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1158</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Series </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;network snapshots&quot;</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1159</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1160</span>     <span class="c1"># Cast names index to string + suffix</span>
+<span class="g g-Whitespace">   </span><span class="mi">1161</span>     <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1162</span>         <span class="n">index</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1163</span>         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1164</span>         <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="n">suffix</span>
+<span class="g g-Whitespace">   </span><span class="mi">1165</span>     <span class="p">)</span>
 
 <span class="ne">ValueError</span>: Series e_min_pu has an index which does not align with the passed network snapshots.
 </pre></div>
